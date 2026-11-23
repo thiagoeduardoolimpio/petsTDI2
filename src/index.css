@@ -175,3 +175,36 @@ body {
   background: #dcfce7;
   color: #15803d;
 }
+
+/* ---------- Edição e remoção ---------- */
+.formulario.editando {
+  border: 2px solid var(--laranja);
+}
+
+.botoes-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.botao.pequeno {
+  margin-top: 0;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.botao.secundario {
+  background: #e2e8f0;
+  color: var(--azul-escuro);
+}
+
+.botao.perigo {
+  background: #dc2626;
+}
