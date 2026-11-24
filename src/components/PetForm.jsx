@@ -1,50 +1,36 @@
 import { useState } from "react";
-import { RARIDADES } from "../data/opcoes";
+import { RARIDADES } from "../data/opcoes.js";
+import { validarPet } from "../utils/validarPet.js";
 
-// Formulário usado tanto para cadastrar quanto para editar uma criatura.
 function PetForm({ petEmEdicao, onSalvar, onCancelar }) {
-  const [nome, setNome] = useState(petEmEdicao?.nome || "");
-  const [especie, setEspecie] = useState(petEmEdicao?.especie || "");
+  const [nome, setNome] = useState(petEmEdicao?.nome ?? "");
+  const [especie, setEspecie] = useState(petEmEdicao?.especie ?? "");
   const [energia, setEnergia] = useState(petEmEdicao?.energia ?? 50);
   const [personalidade, setPersonalidade] = useState(
-    petEmEdicao?.personalidade || ""
+    petEmEdicao?.personalidade ?? ""
   );
-  const [raridade, setRaridade] = useState(
-    petEmEdicao?.raridade || "Comum"
-  );
-  const [status, setStatus] = useState(
-    petEmEdicao?.status || "Disponível"
-  );
-  const [imagem, setImagem] = useState(petEmEdicao?.imagem || "");
+  const [raridade, setRaridade] = useState(petEmEdicao?.raridade ?? "Comum");
+  const [status, setStatus] = useState(petEmEdicao?.status ?? "Disponível");
+  const [imagem, setImagem] = useState(petEmEdicao?.imagem ?? "");
   const [erro, setErro] = useState("");
 
-  // Verifica os dados e envia para o App salvar.
   function enviarFormulario(event) {
     event.preventDefault();
 
-    if (!nome.trim() || !especie.trim() || !personalidade.trim()) {
-      setErro("Preencha nome, espécie e personalidade.");
-      return;
-    }
+    const dados = { nome, especie, personalidade, energia };
+    const mensagemErro = validarPet(dados);
 
-    const energiaNumero = Number(energia);
-
-    if (
-      !Number.isFinite(energiaNumero) ||
-      energiaNumero < 0 ||
-      energiaNumero > 100
-    ) {
-      setErro("A energia deve estar entre 0 e 100.");
+    if (mensagemErro) {
+      setErro(mensagemErro);
       return;
     }
 
     setErro("");
-
     onSalvar({
       nome: nome.trim(),
       especie: especie.trim(),
-      energia: energiaNumero,
       personalidade: personalidade.trim(),
+      energia: Number(energia),
       raridade,
       status,
       imagem: imagem.trim() || "🐾",
@@ -62,24 +48,33 @@ function PetForm({ petEmEdicao, onSalvar, onCancelar }) {
         <label className="campo">
           Nome
           <input
+            type="text"
             value={nome}
             onChange={(event) => setNome(event.target.value)}
+            maxLength={60}
+            required
           />
         </label>
 
         <label className="campo">
           Espécie
           <input
+            type="text"
             value={especie}
             onChange={(event) => setEspecie(event.target.value)}
+            maxLength={60}
+            required
           />
         </label>
 
         <label className="campo">
           Personalidade
           <input
+            type="text"
             value={personalidade}
             onChange={(event) => setPersonalidade(event.target.value)}
+            maxLength={60}
+            required
           />
         </label>
 
@@ -89,8 +84,10 @@ function PetForm({ petEmEdicao, onSalvar, onCancelar }) {
             type="number"
             min="0"
             max="100"
+            step="1"
             value={energia}
             onChange={(event) => setEnergia(event.target.value)}
+            required
           />
         </label>
 
@@ -110,25 +107,24 @@ function PetForm({ petEmEdicao, onSalvar, onCancelar }) {
 
         <label className="campo">
           Status
-          <select
-            value={status}
-            onChange={(event) => setStatus(event.target.value)}
-          >
+          <select value={status} onChange={(event) => setStatus(event.target.value)}>
             <option value="Disponível">Disponível</option>
             <option value="Adotado">Adotado</option>
           </select>
         </label>
 
         <label className="campo">
-          Imagem ou emoji
+          Imagem (URL) ou emoji
           <input
+            type="text"
             value={imagem}
             onChange={(event) => setImagem(event.target.value)}
+            maxLength={300}
           />
         </label>
       </div>
 
-      {erro && <p className="aviso erro">{erro}</p>}
+      {erro && <p className="aviso erro" role="alert">{erro}</p>}
 
       <div className="botoes-form">
         <button type="submit" className="botao">
@@ -136,11 +132,7 @@ function PetForm({ petEmEdicao, onSalvar, onCancelar }) {
         </button>
 
         {petEmEdicao && (
-          <button
-            type="button"
-            className="botao secundario"
-            onClick={onCancelar}
-          >
+          <button type="button" className="botao secundario" onClick={onCancelar}>
             Cancelar
           </button>
         )}

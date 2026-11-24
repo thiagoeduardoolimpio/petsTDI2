@@ -1,6 +1,4 @@
-// Dados iniciais das criaturas.
-// Cada criatura é um OBJETO; a coleção é um ARRAY de objetos.
-// "id" identifica cada criatura de forma única (nome pode repetir, id não).
+// Dados de demonstração carregados na abertura da aplicação.
 export const petsIniciais = [
   {
     id: 1,
