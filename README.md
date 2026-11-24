@@ -1,114 +1,77 @@
 # PixelPet Rescue
 
-PixelPet Rescue é uma aplicação web para cadastrar e administrar criaturas virtuais em uma central temática de adoção. O projeto foi desenvolvido para a disciplina **Tecnologia em Desenvolvimento de Internet II**, com JavaScript e React.
+Uma aplicação web para gerenciar criaturas virtuais, cuidar delas e explorar um sistema de adoção. Desenvolvido com React, JavaScript e CSS.
 
-**Aplicação publicada:** https://pixelpetrecuethiagoolimpio.vercel.app
+## Preview
 
-## Prévia da interface
+![PixelPet Rescue](docs/prints/pixelpet-rescue.png)
 
-![Prévia local ilustrativa da interface](docs/prints/00-previa-local-ilustrativa.png)
+## Funcionalidades
 
-> A imagem acima é uma prévia local ilustrativa, não uma captura de tela do site publicado. As capturas reais devem ser adicionadas em `docs/prints/`.
-
-## Funcionalidades implementadas
-
-- Listagem de criaturas em cartões.
-- Cadastro de criaturas com validação dos campos.
-- Edição dos registros existentes.
-- Remoção com confirmação.
-- Identificação visual de criaturas disponíveis e adotadas.
-- Exibição de emoji ou imagem informada por URL.
-- Mensagens de confirmação para as operações.
-- Interface adaptável a telas menores.
-
-Os dados são mantidos no estado da aplicação durante a sessão. Ainda não há persistência em `localStorage` ou banco de dados; ao recarregar a página, a lista volta aos registros iniciais.
+- Cadastro de criaturas
+- Edição e remoção de criaturas
+- Sistema de adoção
+- Favoritos
+- Filtros de busca
+- Gerenciamento de energia
+- Persistência de dados com LocalStorage
+- Painel com estatísticas
+- Sistema de conquistas
 
 ## Tecnologias
 
-- JavaScript (ES Modules)
 - React
-- Vite
+- JavaScript
 - CSS
-- Node.js e npm
+- Vite
+- LocalStorage
 
-## Como executar
+## Executando o projeto
 
-É necessário ter Node.js instalado. Na pasta que contém `package.json`, execute:
+Clone o repositório:
+
+```bash
+git clone https://github.com/thiagoeduardoolimpio/pixelpetrescue.git
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd pixelpetrescue
+```
+
+Instale as dependências:
 
 ```bash
 npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```bash
 npm run dev
 ```
 
-Abra no navegador o endereço exibido pelo Vite (normalmente `http://localhost:5173`).
-
-### Comandos disponíveis
-
-| Comando | Finalidade |
-|---|---|
-| `npm run dev` | Inicia o servidor de desenvolvimento. |
-| `npm run build` | Gera a versão de produção em `dist/`. |
-| `npm run preview` | Abre uma prévia da versão de produção. |
-| `npm run lint` | Executa o Oxlint. |
-| `npm test` | Executa os testes automatizados. |
-
-## Estrutura do projeto
+## Estrutura
 
 ```text
-pets/
-├── docs/
-│   └── prints/
-│       ├── 00-previa-local-ilustrativa.png
-│       └── LEIA-ME.md
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── PetCard.jsx
-│   │   └── PetForm.jsx
-│   ├── data/
-│   │   ├── opcoes.js
-│   │   └── pets.js
-│   ├── utils/
-│   │   └── validarPet.js
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── tests/
-│   └── validarPet.test.js
-├── index.html
-├── package.json
-├── package-lock.json
-└── vite.config.js
+src/
+├── components/
+├── data/
+├── utils/
+├── App.jsx
+├── main.jsx
+└── index.css
+
+docs/
+└── prints/
+    └── pixelpet-rescue.png
 ```
 
-## Organização do código
+## Demonstração
 
-- `App.jsx`: mantém a lista de criaturas e controla cadastro, edição, remoção e mensagens.
-- `PetCard.jsx`: apresenta os dados de uma criatura e suas ações.
-- `PetForm.jsx`: controla os campos de cadastro e edição.
-- `validarPet.js`: concentra as regras de validação dos dados.
-- `data/pets.js`: contém os registros iniciais de demonstração.
-- `data/opcoes.js`: centraliza as opções fixas do formulário.
-- `index.css`: reúne os estilos e os ajustes responsivos.
+[PixelPet Rescue — Acessar aplicação](https://pixelpetrecuethiagoolimpio.vercel.app)
 
-## Regras de validação
+---
 
-Nome, espécie e personalidade são obrigatórios. Energia deve ser um número entre 0 e 100; os limites 0 e 100 são aceitos, mas o campo vazio não. A imagem é opcional: pode ser informada uma URL ou um emoji. Quando o campo fica vazio, o cartão usa `🐾`.
-
-## Testes
-
-Execute os testes da validação com:
-
-```bash
-npm test
-```
-
-Os casos automatizados verificam dados válidos, campos obrigatórios, energia vazia, valores não numéricos e os limites do intervalo.
-
-## Capturas de tela
-
-Guarde as imagens em `docs/prints/`. O README usa o caminho relativo `docs/prints/00-previa-local-ilustrativa.png`; ao adicionar uma captura real, use um nome descritivo e atualize o caminho da imagem acima, se desejar apresentá-la no README.
-
-## Créditos
-
-Projeto acadêmico com registros e criaturas fictícias.
+Desenvolvido como projeto acadêmico de Tecnologia em Desenvolvimento de Internet.
